@@ -1,0 +1,56 @@
+<div id="right_ad" class="right_ad">
+		
+	<img id="bigImg" class="bigImg" src="__PUBLIC__/uploads/15.jpg" height="300px" width="120px" title="买家秀" />
+	<foreach name="names" item="name">
+	<img src="__PUBLIC__/uploads/{$name['pic']}" class="smallImg" title="{$name['content']}" />
+	</foreach>
+	<span id="right_close" class="right_x">X</span>
+</div>
+<script>
+	
+	var len = $(".smallImg").length;
+	var index = 0;
+	var time = setInterval(function(){
+		var smallSrc = $(".smallImg").eq(index).attr("src");
+		var smallTit = $(".smallImg").eq(index).attr("title");
+		
+		index++;
+		if(index > len-1){
+			index = 0;
+		}
+		$("#bigImg").attr("src",smallSrc);
+		$("#bigImg").attr("title",smallTit);
+	},1000);
+	$("#right_close").click(function(){
+		$("#right_ad").css("display","none");
+		
+	});
+</script>
+
+	<div id="left_ad" class="left_ad">
+		<img id="bigImg1" class="bigImg1" src="__PUBLIC__/uploads/14.jpg" height="300px" width="120px" title="卖家秀" />
+
+		<foreach name="names" item="name">
+		<img src="__PUBLIC__/uploads/{$name['pic']}" class="smallImg1" title="{$name['content']}" />
+		</foreach>
+		<span id="left_close" class="left_x">X<span>
+	</div>
+	<script>
+		var leng = $(".smallImg1").length;
+		var ind = 0;
+		var time = setInterval(function(){
+			var smallSrc = $(".smallImg1").eq(ind).attr("src");
+			var smallTit = $(".smallImg1").eq(ind).attr("title");
+			
+			ind++;
+			if(ind > leng-1){
+				ind = 0;
+			}
+			$("#bigImg1").attr("src",smallSrc);
+			$("#bigImg1").attr("title",smallTit);
+		},1000);
+
+		$("#left_close").click(function(){
+			$("#left_ad").css("display","none");
+		});
+	</script>

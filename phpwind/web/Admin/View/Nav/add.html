@@ -1,0 +1,77 @@
+<extend name="Public/index"/>
+<block name="content">
+<div id="page-wrapper" style="float:left;width:800px;margin-left:20px;">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">导航栏添加</h1>
+        </div>
+        <!-- /.col-lg-12 -->
+    </div>
+   <div class="row">
+       <div class="col-lg-12">
+           <div class="panel panel-default">
+               <div class="panel-heading">
+                   注意:排序的时候,序列号越小越靠前
+               </div>
+               <div class="panel-body">
+                   <div class="row">
+                       <div class="col-lg-6">
+                           <form role="form" action="{:U('Admin/Nav/insert')}" method="post" enctype="multipart/form-data">
+                               
+                               <div class="form-group">
+                                   <label>模块名</label>
+                                   <input name="name" placeholder="请输入模块名" class="form-control">
+                               </div>
+                               
+                               <div class="form-group">
+                                   <label>路径</label>
+                                   <input type="text" name="url" placeholder="请输入正确路径" class="form-control">
+                               </div>
+                           
+                               <div class="form-group">
+                                   <label>序列号</label>
+                                   <label class="radio-inline">
+                                       <input type="radio" checked="" value="1" id="optionsRadiosInline1" name="num">1
+                                   </label>
+                                   <label class="radio-inline">
+                                       <input type="radio" value="2" id="optionsRadiosInline2" name="num">2
+                                   </label>
+                                   <label class="radio-inline">
+                                       <input type="radio" value="3" id="optionsRadiosInline3" name="num">3
+                                   </label>
+                                   <label class="radio-inline">
+                                       <input type="radio" checked="" value="4" id="optionsRadiosInline1" name="num">4
+                                   </label>
+                                   <label class="radio-inline">
+                                       <input type="radio" value="5" id="optionsRadiosInline2" name="num">5
+                                   </label>
+                                   <label class="radio-inline">
+                                       <input type="radio" value="6" id="optionsRadiosInline3" name="num">6
+                                   </label>
+                                   <label class="radio-inline">
+                                       <input type="radio" value="7" id="optionsRadiosInline3" name="num">7
+                                   </label>
+                                   <label class="radio-inline">
+                                       <input type="radio" value="8" id="optionsRadiosInline3" name="num">8
+                                   </label>
+
+                               </div>
+                              <button class="btn btn-warning" type="reset">重置</button>
+                               <button class="btn btn-info" type="submit">提交</button>
+                           </form>
+                       </div>
+                 <!--   http://localhost/Class/s43/project/index.php/Admin/User/add.html
+                   http://localhost/Class/s43/project/index.php/Admin/User/add.shtml
+                   lamp43/Admin/User/add
+                   lamp43/Admin/User/add.html -->
+                   </div>
+                   <!-- /.row (nested) -->
+               </div>
+               <!-- /.panel-body -->
+           </div>
+           <!-- /.panel -->
+       </div>
+       <!-- /.col-lg-12 -->
+   </div>
+</div>
+</block>

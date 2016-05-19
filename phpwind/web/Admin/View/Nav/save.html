@@ -1,0 +1,76 @@
+<extend name="Public/index"/>
+<block name="content">
+<div id="page-wrapper" style="float:left;width:800px;">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">导航列表的修改</h1>
+        </div>
+        <!-- /.col-lg-12 -->
+    </div>
+   <div class="row">
+                   <div class="col-lg-12">
+                       <div class="panel panel-default">
+                           <div class="panel-heading">
+                               Basic Form Elements
+                           </div>
+                           <div class="panel-body">
+                               <div class="row">
+                                   <div class="col-lg-6">
+                                       <form role="form" action="{:U('Admin/Nav/update')}" method="post" enctype="multipart/form-data">
+                                           <input type="hidden" name="id" value="{$info.id}">
+                                           <div class="form-group">
+                                               <label>模块名</label>
+                                               <input value="{$info.name}" name="name" placeholder="请输入新的模块名" class="form-control">
+                                           </div>
+                                           
+                                           <div class="form-group">
+                                               <label>路径</label>
+                                               <input value="{$info.url}" type="text" name="url" placeholder="请输入新的模块路径" class="form-control">
+                                           </div>
+                                           <div class="form-group">
+                                             <label>序列号</label>
+                                             <label class="radio-inline">
+                                                 <input type="radio" checked="" value="1" id="optionsRadiosInline1" name="num" <if condition="$info['num'] eq 1"> checked</if>>1
+                                             </label>
+                                             <label class="radio-inline">
+                                                 <input type="radio" value="2" id="optionsRadiosInline2" name="num" <if condition="$info['num'] eq 2"> checked</if>>2
+                                             </label>
+                                             <label class="radio-inline">
+                                                 <input type="radio" value="3" id="optionsRadiosInline3" name="num" <if condition="$info['num'] eq 3"> checked</if>>3
+                                             </label>
+                                             <label class="radio-inline">
+                                                 <input type="radio" checked="" value="4" id="optionsRadiosInline1" name="num" <if condition="$info['num'] eq 4"> checked</if>>4
+                                             </label>
+                                             <label class="radio-inline">
+                                                 <input type="radio" value="5" id="optionsRadiosInline2" name="num" <if condition="$info['num'] eq 5"> checked</if>>5
+                                             </label>
+                                             <label class="radio-inline">
+                                                 <input type="radio" value="6" id="optionsRadiosInline3" name="num" <if condition="$info['num'] eq 6"> checked</if>>6
+                                             </label>
+                                             <label class="radio-inline">
+                                                 <input type="radio" value="7" id="optionsRadiosInline3" name="num" <if condition="$info['num'] eq 7"> checked</if>>7
+                                             </label>
+                                             <label class="radio-inline">
+                                                 <input type="radio" value="8" id="optionsRadiosInline3" name="num" <if condition="$info['num'] eq 8"> checked</if>>8
+                                             </label>
+
+                                         </div>
+                                           <button class="btn btn-warning" type="reset">重置</button>
+                                           <button class="btn btn-info" type="submit">提交</button>
+                                       </form>
+                                   </div>
+                             <!--   http://localhost/Class/s43/project/index.php/Admin/User/add.html
+                               http://localhost/Class/s43/project/index.php/Admin/User/add.shtml
+                               lamp43/Admin/User/add
+                               lamp43/Admin/User/add.html -->
+                               </div>
+                               <!-- /.row (nested) -->
+                           </div>
+                           <!-- /.panel-body -->
+                       </div>
+                       <!-- /.panel -->
+                   </div>
+                   <!-- /.col-lg-12 -->
+               </div>
+</div>
+</block>

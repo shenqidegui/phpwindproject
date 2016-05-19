@@ -1,0 +1,114 @@
+<extend name="Public/index" />
+<block name="content">
+	<div class="main-content">
+		<div class="breadcrumbs" id="breadcrumbs">
+			<script type="text/javascript">
+				try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+			</script>
+
+			<ul class="breadcrumb">
+				<li>
+					<i class="icon-home home-icon"></i>
+					<a href="#">后台主页</a>
+				</li>
+
+				<li>
+					<a href="{:U('Admin/Cardstate/index')}">帖子管理</a>
+				</li>
+				<li class="active">帖子状态修改</li>
+			</ul><!-- .breadcrumb -->
+
+			<div class="nav-search" id="nav-search">
+				<form class="form-search" action='{:U('Admin/Cardstate/update')}' method='post'>
+					<span class="input-icon">
+						<input type="text" placeholder="Search ..." name='title' class="nav-search-input" id="nav-search-input" autocomplete="off" />
+						<i class="icon-search nav-search-icon"></i>
+                        <button class="btn btn-xs btn-info">搜索</button>
+					</span>
+				</form>
+			</div><!-- #nav-search -->
+		</div>
+
+		<div class="page-content">
+			<div class="page-header">
+				<h1>
+					帖子管理
+					<small>
+						<i class="icon-double-angle-right"></i>
+						帖子状态修改
+					</small>
+				</h1>
+			</div><!-- /.page-header -->
+
+			<div class="row">
+				<div class="col-xs-12">
+					<!-- PAGE CONTENT BEGINS -->
+					<form class="form-horizontal" role="form" action="{:U('Admin/Cardstate/update')}" method="post">
+						<foreach name='cardstates' item='cardstates'>
+						<input type='hidden' name='cid' value="{$cardstates['cid']}"/>
+                        <div class="form-group">
+							<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 标题</label>
+							<div class="col-sm-9">
+								<input type="text" readonly id="form-field-1" placeholder="" class="col-xs-10 col-sm-5" name='title' value="{$cardstates['title']}"/>
+							</div>
+						</div>
+                    							
+						<div class="form-group">
+							<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 是否显示</label>
+							<div class="col-sm-9">
+								<input type="radio" id="form-field-1" placeholder="" name='is_show' value=0 {$cardstates['is_show']? '' : 'checked'}/>不显示
+								<input type="radio" id="form-field-1" placeholder="" name='is_show' value=1 {$cardstates['is_show']? 'checked' : ''}/>显示
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 是否是精华帖</label>
+							<div class="col-sm-9">
+								<input type="radio" id="form-field-1" placeholder="" name='is_hot' value=0 <if condition="$cardstates['is_hot'] eq 0"> checked</if>/>普通帖
+								<input type="radio" id="form-field-1" placeholder="" name='is_hot' value=1 <if condition="$cardstates['is_hot'] eq 1"> checked</if>/>精华帖
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 是否置顶显示</label>
+							<div class="col-sm-9">
+								<input type="radio" id="form-field-1" placeholder="" name='is_top' value=0 <if condition="$cardstates['is_top'] eq 0"> checked</if>/>不置顶
+								<input type="radio" id="form-field-1" placeholder="" name='is_top' value=1 <if condition="$cardstates['is_top'] eq 1"> checked</if>/>置顶显示
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 审核状态</label>
+							<div class="col-sm-9">
+								<input type="radio" id="form-field-1" placeholder="" name='is_check' value=0 <if condition="$cardstates['is_check'] eq 0"> checked</if>/>不必审核
+								<input type="radio" id="form-field-1" placeholder="" name='is_check' value=1 <if condition="$cardstates['is_check'] eq 1"> checked</if>/>审核中
+								<input type="radio" id="form-field-1" placeholder="" name='is_check' value=2 <if condition="$cardstates['is_check'] eq 2"> checked</if>/>审核通过
+								<input type="radio" id="form-field-1" placeholder="" name='is_check' value=3 <if condition="$cardstates['is_check'] eq 3"> checked</if>/>审核未通过
+							</div>
+						</div>
+					</foreach>
+
+						
+						
+						<!--<div class="space-4"></div>
+
+						-->
+
+						<div class="clearfix form-actions">
+							<div class="col-md-offset-3 col-md-9">
+								<button class="btn btn-info" type="submit">
+									<i class="icon-ok bigger-110"></i>
+									提交
+								</button>
+
+								&nbsp; &nbsp; &nbsp;
+								<button class="btn" type="reset">
+									<i class="icon-undo bigger-110"></i>
+									重置
+								</button> 
+							</div>
+						</div>
+					</form>
+				</div><!-- /.col -->
+			</div><!-- /.row -->
+		</div><!-- /.page-content -->
+	</div><!-- /.main-content -->
+
+</block>

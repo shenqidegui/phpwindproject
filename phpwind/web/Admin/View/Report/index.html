@@ -1,0 +1,229 @@
+<extend name="Public/index"/>
+<block name="content">
+  <div class="main-content">
+    <div id="breadcrumbs" class="breadcrumbs">
+      <script type="text/javascript">
+        try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+      </script>
+
+      <ul class="breadcrumb">
+        <li>
+          <i class="icon-home home-icon"></i>
+          <a href="/home/project/ThinkPHP">后台主页</a>
+        </li>
+
+        <li>
+          <a href="#">举报管理</a>
+        </li>
+        <li class="active">帖子举报</li>
+      </ul><!-- .breadcrumb -->
+    </div>
+
+    <div class="page-content">
+      <div class="page-header">
+        <h1>
+          举报管理
+          <small>
+            <i class="icon-double-angle-right"></i>
+            帖子举报列表
+          </small>
+        </h1>
+      </div><!-- /.page-header -->    
+      <div class="row">
+        <div class="col-xs-12">
+          <!-- PAGE CONTENT BEGINS -->
+
+          <div class="row">
+            <div class="col-xs-12">
+              <div class="table-responsive">
+                <table class="table table-striped table-bordered table-hover" id="sample-table-1">
+                  <!-- 分页搜索 -->
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <div id="sample-table-2_length" class="dataTables_length">
+                        <form action="{:U('Admin/Report/index')}" method="get">
+                        <label>每页显示 
+                          <select id="num" name="num" size="1" aria-controls="sample-table-2">
+                            <option <?php echo $_GET['num'] == 5 ? 'selected' : '' ?> value="5">5</option>
+                            <option <?php echo $_GET['num'] == 10 ? 'selected' : '' ?> value="10">10</option>
+                            <option <?php echo $_GET['num'] == 15 ? 'selected' : '' ?> value="15">15</option>
+                          </select> 条
+                        </label>
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <div class="dataTables_filter" id="sample-table-2_filter">
+                        <label>搜索: 
+                          <input id="search" type="text" name="keyword" aria-controls="sample-table-2" placeholder="请输入敏感词" value="{$Think.get.keyword}">
+                        </label>
+                        <button class="btn btn-sm btn-primary">查询</button>
+                      </form>
+                      </div>
+                    </div>
+                  </div>
+                  <thead>
+                    <tr>
+                      <th>被举报帖子id</th>
+                      <th>举报人</th>
+                      <th>举报原因</th>
+                      <th>举报时间</th>
+                      <th>举报的次数</th>
+                      <th>状态</th>
+                      <!-- 状态 0:未处理  1:已经忽略 2:已经禁用 -->
+                      <th>操作</th>
+                    </tr>
+                  </thead>
+                  <foreach name="reports" item="vo" key="k" >
+                    <tbody>
+                      <tr>
+                        <td>{$vo.bid}</td>
+                        <td>{$vo.uid}</td>
+                        <td>{$vo.reason}</td>
+                        <td>{$vo.regtime}</td>
+                        <td>{$vo.report_num}次</td>
+                        <td>
+                          <!-- 状态为0表示未处理 -->
+                          <if condition="$vo.status eq 0">
+                            <span class="label label-sm label-warning wcl">未处理</span>
+                          <else />
+                            <span class="label label-sm label-success ycl">已处理</span>
+                          </if>
+                        </td>
+                        <td>
+                          <div class="visible-md visible-lg hidden-sm hidden-xs btn-group">&#12288;
+                              <!-- 连接前台帖子详情页-->
+                            <a class="btn btn-xs btn-warning" href="">
+                              <i class="icon-zoom-in bigger-120"></i>
+                            </a>
+                              <if condition="$vo.status eq 0">
+                                <button class="btn btn-xs btn-info ignore" abc="{$vo.id}">
+                                  忽略
+                                </button>&#12288;
+                              </if>
+                              <if condition="$vo.status eq 1">
+                                <button class="btn btn-xs btn-info">
+                                  已忽略
+                                </button>&#12288;
+                              </if> 
+                              
+                              <if condition="$vo.status eq 0">
+                                <button class="btn btn-xs btn-danger disable" abc="{$vo.id}">禁用</button>&#12288;
+                              </if>
+                              <if condition="$vo.status eq 2">
+                                <button class="btn btn-xs btn-danger">已禁用</button>&#12288;
+                              </if>
+
+                          </div>
+
+                          <div class="visible-xs visible-sm hidden-md hidden-lg">
+                            <div class="inline position-relative">
+                              <button data-toggle="dropdown" class="btn btn-minier btn-primary dropdown-toggle">
+                                <i class="icon-cog icon-only bigger-110"></i>
+                              </button>
+                              <ul class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
+                                <li>
+                                  <a title="View" data-rel="tooltip" class="tooltip-info" href="#">
+                                    <span class="blue">
+                                      <i class="icon-zoom-in bigger-120"></i>
+                                    </span>
+                                  </a>
+                                </li>
+
+                                <li>
+                                  <a title="Edit" data-rel="tooltip" class="tooltip-success" href="#">
+                                    <span class="green">
+                                      <i class="icon-edit bigger-120"></i>
+                                    </span>
+                                  </a>
+                                </li>
+
+                                <li>
+                                  <a title="Delete" data-rel="tooltip" class="tooltip-error" href="#">
+                                    <span class="red">
+                                      <i class="icon-trash bigger-120"></i>
+                                    </span>
+                                  </a>
+                                </li>
+                              </ul>
+                            </div>
+                          </div>                      
+                        </td>
+                      </tr>
+                    </tbody>
+                  </foreach>
+                </table>
+                <div class="row">
+                  <div id="pages" class="col-sm-5">
+                  </div>                      
+                  <div id="pages" class="col-sm-3">
+                    {$pages}
+                  </div>
+                </div>
+                <style type="text/css">
+                    #pages a,#pages span{ background-color: #fff;
+                            border: 1px solid #ddd;
+                            color: #337ab7;
+                            float: left;
+                            line-height: 1.42857;
+                            margin-left: -1px;
+                            padding: 6px 12px;
+                            position: relative;
+                            text-decoration: none;}
+                    #pages span {
+                          background-color: #337ab7;
+                          border-color: #337ab7;
+                          color: #fff;
+                          cursor: default;
+                          z-index: 2;
+                          }
+                </style>
+              </div><!-- /.table-responsive -->
+            </div><!-- /span -->
+          </div><!-- /row -->
+          <div class="hr hr-18 dotted hr-double"></div>
+        </div><!-- /.col -->
+      </div><!-- /.row -->
+    </div><!-- /.page-content -->
+  </div>
+  <script src="__PUBLIC__/Admin/js/jquery-1.8.3.min.js"></script>
+  <script>
+    // ajax处理忽略
+    $('.ignore').live('click',function(){
+      var url = "{:U('Admin/Report/ignore')}";
+      var id = $(this).attr('abc');
+      // alert(id);
+      var td = $(this);
+      $.get(url,{id:id},function(data){
+        // console.log(data);
+        if(data==1){
+          td.parents('tr').find('.wcl').attr('class','label label-sm label-success ycl').html('已处理');
+          td.html('已忽略');
+          td.removeClass('ignore');
+          td.parents('tr').find('.disable').remove();
+        }else{
+          alert('操作失败');
+        }
+      })
+    })
+
+    // ajax处理禁用
+    $('.disable').live('click',function(){
+      var url = "{:U('Admin/Report/disable')}";
+      var id = $(this).attr('abc');
+      var td = $(this);
+      // alert(id);
+      $.get(url,{id:id},function(data){
+        if(data==1){
+          td.parents('tr').find('.wcl').attr('class','label label-sm label-success ycl').html('已处理');
+          td.html('已禁用');
+          td.removeClass('disable');
+          td.parents('tr').find('.ignore').remove();
+        }else{
+          alert('操作失败');
+        }
+
+      })
+
+    })
+  </script>
+</block>

@@ -1,0 +1,11 @@
+<!---------用户站内信提醒信息----------->
+	<a class="header_login_btn" id="J_head_msg_btn" href="__APP__/Messagetext/index" >
+	<span class="pr"><span class="header_message header_message_none"><em class="core_num J_hm_num">0</em></span></span>
+	<!--------需要进行判断，是否有*出现？？---------->
+	<if condition="$mes == 2">
+	<div style="width:10px;height:10px;margin-left:16px;margin-top:-38px;color:red;font-size:20px;font-weight:bolder;" id="star">*</div>
+	<else />
+	<div style="width:10px;height:10px;margin-left:16px;margin-top:-38px;color:red;font-size:20px;font-weight:bolder;display:none" id="dstar" >*</div>
+	</if>
+	</a>
+	

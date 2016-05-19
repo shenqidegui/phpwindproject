@@ -1,0 +1,80 @@
+<extend name="Public/index"/>
+<block name="content">         
+  <div class="main-content">
+    <!-- 路径 -->
+    <div id="breadcrumbs" class="breadcrumbs">
+      <script type="text/javascript">
+        try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+      </script>
+      <ul class="breadcrumb">
+        <li>
+          <i class="icon-home home-icon"></i>
+          <a href="/home/project/ThinkPHP">后台主页</a>
+        </li>
+
+        <li>
+          <a href="#">版块管理</a>
+        </li>
+        <li class="active">版块信息列表</li>
+      </ul><!-- .breadcrumb -->
+    </div>
+
+
+    <div class="page-content">
+      <div class="page-header">
+        <h1>
+          板块管理
+          <small>
+            <i class="icon-double-angle-right"></i>
+            板块添加
+          </small>
+        </h1>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <form class="form-horizontal" role="form" action="{:U('Admin/Type/insert')}" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+              <label for="form-field-1" class="col-sm-3 control-label no-padding-right"> 父级板块名称 </label>
+
+              <div class="col-sm-9">
+                <select id="form-field-select-1" name="pid" class="col-xs-10 col-sm-5">
+                  <option value="0">顶级板块</option>
+                  <foreach name="plates" item="vo" >
+                    <option value="{$vo.id}">{$vo.name}</option>
+                  </foreach>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="form-field-1" class="col-sm-3 control-label no-padding-right"> 新板块名称 </label>
+
+              <div class="col-sm-9">
+                <input type="text" name="name" class="col-xs-10 col-sm-5" id="form-field-1">
+              </div>
+            </div>
+            
+            <div class="space-4"></div>
+
+            <div class="clearfix form-actions">
+              <div class="col-md-offset-3 col-md-9">
+                <button type="submit" class="btn btn-info">
+                  <i class="icon-ok bigger-110"></i>
+                  提交
+                </button>
+
+                &nbsp; &nbsp; &nbsp;
+                <button type="reset" class="btn">
+                  <i class="icon-undo bigger-110"></i>
+                  重置
+                </button> 
+              </div>
+            </div>
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+</block>

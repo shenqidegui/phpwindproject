@@ -1,0 +1,130 @@
+<extend name="Public/index" />
+<block name="content">
+	<div class="main-content">
+		<div class="breadcrumbs" id="breadcrumbs">
+			<script type="text/javascript">
+				try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+			</script>
+
+			<ul class="breadcrumb">
+				<li>
+					<i class="icon-home home-icon"></i>
+					<a href="#">后台主页</a>
+				</li>
+
+				<li>
+					<a href="{:U('Admin/Cardstate/index')}">帖子管理</a>
+				</li>
+				<li class="active">帖子修改</li>
+			</ul><!-- .breadcrumb -->
+
+			<div class="nav-search" id="nav-search">
+				<form class="form-search" action='{:U('Admin/Card/update')}' method='post'>
+					<span class="input-icon">
+						<input type="text" placeholder="Search ..." name='title' class="nav-search-input" id="nav-search-input" autocomplete="off" />
+						<i class="icon-search nav-search-icon"></i>
+                        <button class="btn btn-xs btn-info">搜索</button>
+					</span>
+				</form>
+			</div><!-- #nav-search -->
+		</div>
+
+		<div class="page-content">
+			<div class="page-header">
+				<h1>
+					帖子管理
+					<small>
+						<i class="icon-double-angle-right"></i>
+						帖子修改
+					</small>
+				</h1>
+			</div><!-- /.page-header -->
+
+			<div class="row">
+				<div class="col-xs-12">
+					<form method="post" action="{:U('Admin/Card/update')}" role="form" class="form-horizontal">
+						<foreach name='cards' item='val'>
+						<input type="hidden" value="{$val['id']}" name="id">
+                        
+						<div class="form-group">
+							<label for="form-field-1" class="col-sm-3 control-label no-padding-right"> 标题</label>
+
+							<div class="col-sm-9">
+								<input type="text" value="{$val['title']}" name="title" class="col-xs-10 col-sm-5" placeholder="" id="form-field-1" readonly>
+							</div>
+						</div>
+                        
+   
+						<div class="form-group">
+							<label for="form-field-1" class="col-sm-3 control-label no-padding-right"> 作者 </label>
+
+							<div class="col-sm-9">
+								<input type="text" value="{$val['username']}" name="username" class="col-xs-10 col-sm-5" placeholder="" id="form-field-1" readonly="">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="form-field-1" class="col-sm-3 control-label no-padding-right"> 模块分区 </label>
+							<select name="platename" aria-controls="dataTables-example" class="form-control input-sm">
+	                          <!-- <option <?php echo $_GET['num'] == 2 ? 'selected' : '' ?> value="2">2</option> -->
+	                          
+                        </select>
+							
+
+							<div class="col-sm-9">
+								<input type="text" value="{$val['username']}" name="username" class="col-xs-10 col-sm-5" placeholder="" id="form-field-1" readonly="">
+							</div>
+						</div>
+						
+					    <div class="form-group">
+							<label for="form-field-1" class="col-sm-3 control-label no-padding-right"> 内容 </label>
+
+							<div class="col-sm-9">
+								<textarea name="content" placeholder="" id="form-field-1" readonly="" cols="39" rows="5" value="{$val['content']}">																		
+快快快快快叶蓉然											</textarea>
+							</div>
+						</div>
+						
+						
+						
+
+						<div class="form-group">
+							<label for="form-field-1" class="col-sm-3 control-label no-padding-right"> 帖子来源 </label>
+
+							<div class="col-sm-9">
+								<input type="text" value="" name="loadpath" class="col-xs-10 col-sm-5" placeholder="" id="form-field-1" readonly="">
+							</div>
+						</div>
+						
+						<div class="form-group">
+							<label for="form-field-1" class="col-sm-3 control-label no-padding-right"> 发帖时间 </label>
+
+							<div class="col-sm-9">
+								<input type="text" value="2016-04-27 16:25:36" name="createtime" class="col-xs-10 col-sm-5" placeholder="" id="form-field-1" readonly="">
+							</div>
+						</div>
+						
+						<!--<div class="space-4"></div>
+
+						-->
+
+						<div class="clearfix form-actions">
+							<div class="col-md-offset-3 col-md-9">
+								<button type="submit" class="btn btn-info">
+									<i class="icon-ok bigger-110"></i>
+									提交
+								</button>
+
+								&nbsp; &nbsp; &nbsp;
+								<button type="reset" class="btn">
+									<i class="icon-undo bigger-110"></i>
+									重置
+								</button> 
+							</div>
+						</div>
+					</form>
+				</div><!-- /.col -->
+			</div><!-- /.row -->
+		</div><!-- /.page-content -->
+	</div><!-- /.main-content -->
+
+</block>

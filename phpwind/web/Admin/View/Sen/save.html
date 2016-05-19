@@ -1,0 +1,84 @@
+<extend name="Public/index"/>
+<block name="content">
+  <div class="main-content">
+    <div id="breadcrumbs" class="breadcrumbs">
+      <script type="text/javascript">
+        try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+      </script>
+
+      <ul class="breadcrumb">
+        <li>
+          <i class="icon-home home-icon"></i>
+          <a href="/home/project/ThinkPHP">后台主页</a>
+        </li>
+
+        <li>
+          <a href="#">敏感词管理</a>
+        </li>
+        <li class="active">敏感词信息</li>
+      </ul><!-- .breadcrumb -->
+    </div>
+
+    <div class="page-content">
+      <div class="page-header">
+        <h1>
+          敏感词修改
+          <small>
+            <i class="icon-double-angle-right"></i>
+            词语信息
+          </small>
+        </h1>
+      </div><!-- /.page-header -->
+
+
+      <div class="row">
+        <div class="col-xs-12">
+          <!-- PAGE CONTENT BEGINS -->
+
+          <form method="post" action="{:U('Admin/Sen/update')}" role="form" class="form-horizontal">
+            <input type="hidden" value="{$val['id']}" name="id">
+              <div class="form-group">
+                <label for="form-field-1" class="col-sm-3 control-label no-padding-right"> 敏感词</label>
+
+                <div class="col-sm-9">
+                  <input type="text" value="{$val['word']}" name="word" class="col-xs-10 col-sm-5" id="form-field-1">
+                </div>
+              </div>
+                              
+              <div class="form-group">
+                <label for="form-field-1" class="col-sm-3 control-label no-padding-right"> 等级 </label>
+                    <!-- 词语查询等级：1禁用、2审核、3替换 -->
+                <div class="col-sm-9">
+                  <input type="radio" value="1" <if condition="$val['grade'] eq 1"> checked</if> name="grade" id="form-field-1">禁用
+                  <input type="radio" value="2" <if condition="$val['grade'] eq 2"> checked</if> name="grade" id="form-field-1" >审核
+                  <input type="radio" value="3" <if condition="$val['grade'] eq 3"> checked</if> name="grade" id="form-field-1">替换
+                </div>
+              </div>
+            
+            <!--<div class="space-4"></div>
+
+            -->
+
+            <div class="clearfix form-actions">
+              <div class="col-md-offset-3 col-md-9">
+                <button type="submit" class="btn btn-info">
+                  <i class="icon-ok bigger-110"></i>
+                  提交
+                </button>
+
+                &nbsp; &nbsp; &nbsp;
+                <button type="reset" class="btn">
+                  <i class="icon-undo bigger-110"></i>
+                  重置
+                </button> 
+              </div>
+            </div>
+          </form>
+        </div><!-- /.col -->
+      </div><!-- /.row -->
+    </div>
+
+
+  </div>
+  
+</block>

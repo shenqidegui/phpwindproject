@@ -1,0 +1,256 @@
+<extend name="Public/index"/>
+<block name="content">
+	<div class="main-content">
+		<div class="breadcrumbs" id="breadcrumbs">
+			<script type="text/javascript">
+				try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+			</script>
+
+			<ul class="breadcrumb">
+				<li>
+					<i class="icon-home home-icon"></i>
+					<a href="">后台主页</a>
+				</li>
+
+				<li>
+					<a href="#">帖子管理</a>
+				</li>
+				<li class="active">帖子状态管理</li>
+			</ul><!-- .breadcrumb -->
+
+
+		</div>
+
+		<div class="page-content">
+			<div class="page-header">
+				<h1>
+					帖子管理
+					<small>
+						<i class="icon-double-angle-right"></i>
+						帖子状体管理
+					</small>
+				</h1>
+			</div><!-- /.page-header -->
+
+			<div class="row">
+				<div class="col-xs-12">
+					<!-- PAGE CONTENT BEGINS -->
+
+					<div class="row">
+						<div class="col-xs-12">
+							<div class="table-responsive">
+								<table id="sample-table-1" class="table table-striped table-bordered table-hover">
+									<!-- 分页搜索 -->
+									<div class="row">
+									  <div class="col-sm-6">
+									    <div id="sample-table-2_length" class="dataTables_length">
+									      <form action="{:U('Admin/Sen/index')}" method="get">
+									      <label>每页显示 
+									        <select id="num" name="num" size="1" aria-controls="sample-table-2">
+									          <option <?php echo $_GET['num'] == 5 ? 'selected' : '' ?> value="5">5</option>
+									          <option <?php echo $_GET['num'] == 10 ? 'selected' : '' ?> value="10">10</option>
+									          <option <?php echo $_GET['num'] == 15 ? 'selected' : '' ?> value="15">15</option>
+									        </select> 条
+									      </label>
+									    </div>
+									  </div>
+									  <div class="col-sm-6">
+									    <div class="dataTables_filter" id="sample-table-2_filter">
+									      <label>搜索: 
+									        <input id="search" type="text" name="keyword" aria-controls="sample-table-2" placeholder="请输入标题" value="{$Think.get.keyword}">
+									      </label>
+									      <button class="btn btn-sm btn-primary">查询</button>
+									    </form>
+									    </div>
+									  </div>
+									</div>
+									<thead>
+										<tr>
+											<th class="center">
+												<label>
+													<input type="checkbox" class="ace" />
+													<span class="lbl"></span>
+												</label>
+											</th>
+											<!-- <th>序号</th> -->
+											<th>帖子ID(cid)</th>
+											<th>标题(待修改)</th>
+											<th>是否展示</th>
+											<th>精华帖</th>
+											<th>置顶帖</th>
+											<th>审核状态</th>
+											<th>操作</th>
+										</tr>
+									</thead>
+
+									<tbody>
+									<foreach name='cardstates' item='cardstates'>
+										<tr>
+											<td class="center">
+												<label>
+													<input type="checkbox" class="ace" />
+													<span class="lbl"></span>
+												</label>
+											</td>
+											<!-- <td>{$order++}</td> -->
+											<td class="sid">{$cardstates['cid']}</td>
+											<td >
+												<a href="{:U('Admin/Card/index',array('id'=>$cardstates['cid']))}">{$cardstates['title']}</a>
+											</td>
+											<td>
+												<switch name="cardstates['is_show']">
+												<case value='1' >显示</case>
+												<case value='0' >不显示</case>
+												<default />显示
+												</switch>
+											</td>
+											<td>
+											<!-- state状态：0待审、1普通、2置顶、3精华、-1未通过、9禁用 -->
+											<switch name="cardstates['is_hot']">
+												<case value='0' >普通帖</case>
+												<case value='1' >精华帖</case>
+												<default />普通帖
+												</switch>
+											</td>
+											<td>
+												<switch name="cardstates['is_top']">
+												<case value='0' >不置顶</case>
+												<case value='1' >置顶显示</case>
+												<default />不置顶
+												</switch>
+											</td>
+											<td>
+												<switch name="cardstates['is_check']">
+												<case value='0' >不必审核</case>
+												<case value='1' >审核中</case>
+												<case value='2' >审核通过</case>
+												<case value='3' >审核未通过</case>
+												<default />不必审核
+												</switch>
+											</td>
+											<td>
+												<div class="visible-md visible-lg hidden-sm hidden-xs btn-group">
+													<a href="{:U('Admin/Cardstate/save',array('cid'=>$cardstates['cid']))}" class="btn btn-xs btn-info">
+														<i class="icon-edit bigger-120"></i>
+													</a>
+
+	
+													<button  class="btn btn-del btn-xs btn-danger" >
+														<i class="icon-trash bigger-120"></i>
+													</button>
+
+													<button class="btn btn-xs btn-warning">
+														<i class="icon-flag bigger-120"></i>
+													</button>
+												</div>
+
+												<div class="visible-xs visible-sm hidden-md hidden-lg">
+													<div class="inline position-relative">
+														<button class="btn btn-minier btn-primary dropdown-toggle" data-toggle="dropdown">
+															<i class="icon-cog icon-only bigger-110"></i>
+														</button>
+
+														<ul class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
+															<li>
+																<a href="#" class="tooltip-info" data-rel="tooltip" title="View">
+																	<span class="blue">
+																		<i class="icon-zoom-in bigger-120"></i>
+																	</span>
+																</a>
+															</li>
+
+															<li>
+																<a href="#" class="tooltip-success" data-rel="tooltip" title="Edit">
+																	<span class="green">
+																		<i class="icon-edit bigger-120"></i>
+																	</span>
+																</a>
+															</li>
+
+															<li>
+																<a href="#" class="tooltip-error" data-rel="tooltip" title="Delete">
+																	<span class="red">
+																		<i class="icon-trash bigger-120"></i>
+																	</span>
+																</a>
+															</li>
+														</ul>
+													</div>
+												</div>
+											</td>
+										</tr>
+										</foreach>
+										
+										<tr>
+											<td class="center">
+												
+											</td>
+											<td colspan=9>
+												<span class="lbl"></span>
+												<div id="pages">
+												<style type="text/css">
+												    #pages a,#pages span{ background-color: #fff;
+												            border: 1px solid #ddd;
+												            color: #337ab7;
+												            float: left;
+												            line-height: 1.42857;
+												            margin-left: -1px;
+												            padding: 6px 12px;
+												            position: relative;
+												            text-decoration: none;}
+												    #pages span {
+												          background-color: #337ab7;
+												          border-color: #337ab7;
+												          color: #fff;
+												          cursor: default;
+												          z-index: 2;
+												          }
+												</style>
+						                          {$page}
+						                        </div>    
+											</td>
+											</tr>
+									</tbody>
+								</table>
+							</div><!-- /.table-responsive -->
+						</div><!-- /span -->
+					</div><!-- /row -->
+
+					<div class="hr hr-18 dotted hr-double"></div>
+					
+	
+				</div><!-- /.col -->
+			</div><!-- /.row -->
+		</div><!-- /.page-content -->
+	</div><!-- /.main-content -->
+	<script type="text/javascript" src="__PUBLIC__/Admin/js/jquery-1.8.3.min.js"></script>
+ 	 <script type="text/javascript">
+    //绑定单击事件
+    // alert($);
+    $('.btn-del').click(function(){
+      // alert('222');
+      //获取id
+      var cid = $(this).parents('tr').find('.sid').html();
+      var url = "{:U('Admin/Cardstate/ajaxdel')}";
+      // alert(url);
+      var btn = $(this);
+      //ajax
+      $.get(url,{cid:cid},function(data){
+        // console.log(data);
+        if(data == 1){
+          // alert('成功');
+         btn.parents('tr').remove();
+         
+        }else{
+          alert('失败');
+        }
+      })
+
+    })
+  </script>
+
+
+
+
+
+</block>

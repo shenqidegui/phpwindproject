@@ -1,0 +1,161 @@
+<extend name="Public/index"/>
+<block name="content">
+	<div class="main-content">
+		<div class="breadcrumbs" id="breadcrumbs">
+			<script type="text/javascript">
+				try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+			</script>
+
+			<ul class="breadcrumb">
+				<li>
+					<i class="icon-home home-icon"></i>
+					<a href="">后台主页</a>
+				</li>
+
+				<li>
+					<a href="#">帖子管理</a>
+				</li>
+				<li class="active">帖子列表</li>
+			</ul><!-- .breadcrumb -->
+
+		</div>
+
+		<div class="page-content">
+			<div class="page-header">
+				<h1>
+					帖子管理
+					<small>
+						<i class="icon-double-angle-right"></i>
+						帖子列表
+					</small>
+				</h1>
+			</div><!-- /.page-header -->
+
+			<div class="row">
+				<div class="col-xs-12">
+					<!-- PAGE CONTENT BEGINS -->
+
+					<div class="row">
+						<div class="col-xs-12">
+							<div class="table-responsive">
+								<table id="sample-table-1" class="table table-striped table-bordered table-hover">
+									<!-- 分页搜索 -->
+									<div class="row">
+									  <div class="col-sm-6">
+									    <div id="sample-table-2_length" class="dataTables_length">
+									      <form action="{:U('Admin/Card/index')}" method="post" >
+									      
+									    </div>
+									  </div>
+									  <div class="col-sm-6">
+									    <div class="dataTables_filter" id="sample-table-2_filter">
+									      <label>搜索: 
+									        <input id="search" type="text" name="title" aria-controls="sample-table-2" placeholder="请输入标题" value="{$Think.get.keyword}">
+									      </label>
+									      <button class="btn btn-sm btn-primary">查询</button>
+									    </form>
+									    </div>
+									  </div>
+									</div>
+									<thead>
+										<tr>
+											<th class="center">
+												<label>
+													<input type="checkbox" class="ace" />
+													<span class="lbl"></span>
+												</label>
+											</th>
+											<!-- <th>序号</th> -->
+											<th>ID</th>
+											<th>标题</th>
+											<th>作者</th>
+											<th>所属板块</th>
+											<th>创建时间</th>
+											<th>点赞次数</th>
+											<th>阅读次数</th>
+											<!-- <th>操作</th> -->
+										</tr>
+									</thead>
+
+									<tbody>
+									<foreach name='cards' item='val'>
+										<tr>
+											<td class="center">
+												<label>
+													<input type="checkbox" class="ace" />
+													<span class="lbl"></span>
+												</label>
+											</td>
+											<!-- <td>{$order++}</td> -->
+											<td class="sid">{$val['id']}</td>
+											<td>
+												<a href="#">{$val['title']}</a>
+											</td>
+											<td>
+												<a href="#">{$val['username']}</a>
+											</td>
+											<td>
+												<a href="#">{$val['platename']}</a>
+											</td>
+											<td>{$val['ctime']}</td>
+											<td>{$val['prisenum']}</td>
+											<td>{$val['clicknum']}</td>
+											<!-- <td>
+												<div class="visible-md visible-lg hidden-sm hidden-xs btn-group">
+													<button  class="btn btn-xs btn-del btn-danger" >
+														<i class="icon-trash bigger-120"></i>
+													</button>
+												</div>
+											</td> -->
+										</tr>
+										</foreach>
+										
+										<tr>
+											<td class="center">
+												
+											</td>
+											<td colspan=9>
+												<span class="lbl"></span>
+												<div id="pages">
+												<style type="text/css">
+												    #pages a,#pages span{ background-color: #fff;
+												            border: 1px solid #ddd;
+												            color: #337ab7;
+												            float: left;
+												            line-height: 1.42857;
+												            margin-left: -1px;
+												            padding: 6px 12px;
+												            position: relative;
+												            text-decoration: none;}
+												    #pages span {
+												          background-color: #337ab7;
+												          border-color: #337ab7;
+												          color: #fff;
+												          cursor: default;
+												          z-index: 2;
+												          }
+												</style>
+						                          {$page}
+						                        </div>    
+											</td>
+											</tr>
+									</tbody>
+								</table>
+							</div><!-- /.table-responsive -->
+						</div><!-- /span -->
+					</div><!-- /row -->
+
+					<div class="hr hr-18 dotted hr-double"></div>
+					
+	
+				</div><!-- /.col -->
+			</div><!-- /.row -->
+		</div><!-- /.page-content -->
+	</div><!-- /.main-content -->
+	
+
+
+
+
+
+</block>

@@ -1,0 +1,223 @@
+﻿<extend name="Public/layout" />
+<block name="imcss">
+<link rel="stylesheet" href="__PUBLIC__/home/css/core_11.css" />
+<link rel="stylesheet" href="__PUBLIC__/home/css/style_11.css" />
+<link rel="stylesheet" href="__PUBLIC__/home/css/widthauto_11.css" />
+<script src="__PUBLIC__/home/js/wind.js"></script>
+<script src="__PUBLIC__/js/jquery.js"></script>
+<link href="__PUBLIC__/home/css/register_8.css" rel="stylesheet" />
+</block>
+<block name="main-content">
+	<div class="main_wrap">
+		<div class="box_wrap register cc">
+			<h2 class="reg_head">登录</h2>
+			<div class="reg_cont_wrap">
+				<div class="reg_cont">
+					<form action="{:U('Home/Index/index')}" method="post" name="login" submit="return false">
+					<div class="reg_form">
+						<dl class="cc">
+							<dt><label for="login_username">帐号：</label></dt>
+							<dd><input id="username" name="username" type="text" class="input length_4" /></dd>
+							<dd id="loginuser" role="tooltip" aria-hidden="true" class="dd_r"></dd>
+						</dl>
+						<dl class="cc">
+							<dt><label for="login_password">密码：</label></dt>
+							<dd><input id="password" name="pwd" type="password" class="input length_4" /></dd>
+							<dd id="loginpwd" role="tooltip" aria-hidden="true" class="dd_r"></dd>
+						</dl>
+						<div id="J_login_qa" style="display:none;"></div>
+						<dl class="cc dl_cd">
+							<dt><label for="J_login_code">验证码：</label></dt>
+							<dd>
+								<input data-id="code" id="code" name="user_code" type="text" class="input length_4 mb5">
+								<dd id="logincode" role="tooltip" aria-hidden="true" class="dd_r"></dd>
+							</dd>
+							<div style="margin-left:125px;margin-top:40px;">
+							<img width="240" height="60" id="recode" src="__CONTROLLER__/code" onclick="this.src='__URL__/code?'+Math.random()" /><br/>
+							<a role="button" href="#" id="J_verify_update_a"> 点击图片换一个</a>
+							</div>
+						</dl>
+						<dl class="cc">
+							<dt>　</dt>
+							<dd style="color:red;">{$errorinfo}</dd>
+						</dl>
+						<dl class="cc pick">
+							<dt>&nbsp;</dt>
+							<dd><a rel="nofollow" href="#" class="fr mr10">找回密码</a><input name="rememberme" value="31536000" type="checkbox" class="checkbox" id="cktime"><label for="cktime">自动登录</label></dd>
+						</dl>
+						<dl class="cc">
+							<dt>&nbsp;</dt>
+							<dd><button class="btn btn_big btn_submit mr20" type="submit">登录</button>
+							</dd>
+						</dl>
+					</div>
+					<input type="hidden" name="csrf_token" value="5763281ca170bf65"/></form>
+				</div>
+			</div>
+			<div class="reg_side">
+				<div class="reg_side_cont">
+					<p class="mb10">还没有帐号？</p>
+					<p class="mb20"><a rel="nofollow" href="{:U('Home/Register/index')}" class="btn btn_big">免费注册</a></p>
+				</div>
+			</div>
+		</div>
+	</div>
+<!--.main-wrap,#main End-->
+</block>
+<block name="imjs">
+<script>
+	var isCode = false;
+	var isUser = false;
+	var isPwd = false;
+	$("form[name='login']").submit(function(){
+		checkcode();
+		checkuser();
+		checkpwd();
+
+		if(isCode && isUser && isPwd){
+			return true;
+		}else{
+			return false;
+		}
+	});
+	
+	$("#username").focus(function(){
+		$('#loginuser').css('color','#ccc');
+		$('#loginuser').html("请输入5-12用户名！");
+		$(this).parent().parent().addClass('current');
+	});
+	
+	$("#username").blur(function(){
+		$('#username').parent().parent().removeClass('current');
+		checkuser();
+	});
+	
+	function checkuser(){
+		
+		if($('#username').val().length == 0){
+			var info = "用户名不能为空！";
+			var color = "red";
+			$('#loginuser').html('<span class="tips_icon_error"><span>' + info);
+			isUser = false;
+			return isUser;
+		}
+		var user = $("#username").val();
+		/*
+		$.ajax({
+			url:"__CONTROLLER__/checkedUser",
+			type:"POST",
+			async: false,
+			data:"username = "+$("#username").val(),
+			success:function(data){
+				if(data == 1){
+					var info = "用户名不存在！";
+					var color = "red";
+					$('#loginuser').html('<span class="tips_icon_error"><span>' + info);
+					isUser = false;
+				}else{
+					$('#loginuser').html('<span class="tips_icon_success"><span>');
+					isUser = true;
+				}
+			},
+		});
+		
+		return isUser;
+		*/
+		$.post('__CONTROLLER__/checkedUser',{'username':$("#username").val()},function(data){
+				if(data == 1){
+					var info = "用户名不存在！";
+					var color = "red";
+					$('#loginuser').html('<span class="tips_icon_error"><span>' + info);
+					isUser = false;
+				}else{
+					$('#loginuser').html('<span class="tips_icon_success"><span>');
+					isUser = true;
+				}
+		},'json');
+	}
+	
+	$("#password").focus(function(){
+		$("#loginpwd").css('color','#ccc');
+		$("#loginpwd").html('请输入密码！');
+		$(this).parent().parent().addClass('current');
+	});
+	
+	$("#password").blur(function(){
+		$('#password').parent().parent().removeClass('current');
+		checkpwd();
+		
+	});
+	
+	function checkpwd(){
+		//密码不能为空
+		if($('#password').val().length == 0){
+			var info = "密码不能为空";
+			var color = "red";
+			$('#loginpwd').html('<span class="tips_icon_error"><span>' + info);
+			isPwd = false;
+		}else{
+	
+			$('#loginpwd').html('');
+			isPwd = true;
+		}
+	}
+	
+	$('#code').focus(function(){
+		$("#logincode").css('color','#ccc');
+		$("#logincode").html('请输入验证码！');
+		$(this).parent().parent().addClass('current');
+	});
+	
+	$('#code').blur(function(){
+		$('#code').parent().parent().removeClass('current');
+		checkcode();
+	});
+	
+	function checkcode(){
+		//验证码不能为空
+		
+		if($('#code').val().length == 0){
+			var info = "验证码不能为空";
+			var color = "red";
+			
+			$('#logincode').html('<span class="tips_icon_error"><span>' + info);
+			isCode = false;
+		}
+			var code = $('#code').val();
+			/*
+			$.ajax({
+				url:"__CONTROLLER__/checkedCode",
+				type:"POST",
+				async: false,
+				data:"user_code ="+$('#code').val(),
+				success:function(data){
+					if(data == 1){
+						var info = "验证码错误！";
+						var color = "red";
+						$('#logincode').html('<span class="tips_icon_error"><span>' + info);
+						isCode = false;
+					}else{
+						$('#logincode').html('<span class="tips_icon_success"><span>');
+						isCode = true;
+					}
+				}
+			});
+			return isCode;
+			*/
+		
+		$.post('__CONTROLLER__/checkedCode',{'user_code':$("#code").val()},function(data){
+				if(data == 1){
+						var info = "验证码错误！";
+						var color = "red";
+						$('#logincode').html('<span class="tips_icon_error"><span>' + info);
+						isCode = false;
+					}else{
+						$('#logincode').html('<span class="tips_icon_success"><span>');
+						isCode = true;
+						
+					}
+		},'json');
+	}
+	
+</script>
+</block>

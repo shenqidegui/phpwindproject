@@ -1,0 +1,197 @@
+	
+	<if condition="$Think.session.webuser.uid != ''">
+	<div class="main_sidebar">
+	<div class="box_wrap user_info">
+		<dl class="cc">
+			<dt id="J_ava_ie6">
+				<a href="__APP__/Personinfo/avatar"><img class="J_avatar" src="__PUBLIC__/uploads/m_{$userinfo['icon']}" data-type="middle" width="72" height="72" onerror="this.src='__PUBLIC__/home/picture/face_small.jpg'" /></a>
+				<a href="__APP__/Personinfo/avatar"><b></b><span>修改头像</span></a>
+			</dt>
+			<dd>
+				<div class="name"><a href="__APP__/Personinfo/index" class="username">{$userinfo['username']}<i></i></a></div>
+				<div class="level"><a href="__APP__/Personinfo/permission/gid/{$userinfo['groupid']}">{$usergroup['groupname']}</a></div>
+				<div class="level_img">
+					<a href="#"><img src="__PUBLIC__/uploads/level/{$usergroup['groupicon']}" alt="{$usergroup['groupname']}" /></a>
+				</div>
+			</dd>
+		</dl>
+		<div class="num">
+			<ul class="cc">
+				<li><a href="__APP__/FriendList/index"><span>{$knows}</span><em>关注</em></a></li>
+				<li><a href="__APP__/FriendList/fans"><span>{$fans}</span><em>粉丝</em></a></li>
+				<li class="tail"><a href="__APP__/Zone/index"><span>{$counts}</span><em>帖子</em></a></li>
+			</ul>
+		</div>
+		<div class="medal_widget" id="J_medal_widget">
+			<div class="medal_list_wrap">
+			<ul id="J_medal_widget_ul" class="cc J_lazyslide_list" style="width:900px;">
+				<foreach name="mes" item="mess">
+				<li><img src="__PUBLIC__/uploads/icon/c_{$mess['image']}" width="30" height="30" title="{$mess['name']}" alt="{$mess['name']}" /></li>
+				</foreach>
+			</ul>
+			
+			</div>
+		</div>
+		<div class="cc punch_widget_wrap">
+		<div id="J_punch_main_tip" class="fl dn"></div>
+			<div class="punch_widget punch_widget_disabled" id="J_punch_widget">
+				<div class="date">{$time|date="m.d",###}<span>周{$week[date(w)]}</span></div>
+				
+				<!--------打卡签到--------->
+				<div id="J_credittxt_pop" class="pop_credittxt_tips" style="position: fixed; top: 186.5px; left: 570.5px; display: none;">
+					<strong>打卡签到</strong>
+					<span>
+					积分
+					<em>+10</em>
+					</span>
+				</div>
+				<!---------打卡签到--------->
+				<if condition="$signtime == '每日打卡'">
+				<div class="cont">
+				<input type="hidden" name="uid" value="{$userinfo['uid']}" />
+				<a  href="javascript:void(0);" id="J_punch_mine" tabindex="-1" onclick="keyDown()" >{$signtime}</a>
+				</div>
+				<div style="line-height:40px;color:#555;font-weight:bold;"><-点击这里</div>
+				<else />
+				<div class="cont">
+				<a  href="javascript:void(0);" id="J_punch_over" tabindex="-1" disabled >已经打卡</a>
+				</div>
+				<div style="line-height:40px;color:#555;font-weight:bold;"><-点击这里</div>
+				</if>
+			</div>
+		</div>
+	</div>
+
+	<pw-drag id="sidebar_1" />
+	<div class="linkforum">
+		<div class="box_wrap">
+			<h2 class="box_title J_sidebar_box_toggle">我的应用</h2>
+			<div class="my_app_list">
+				<ul>
+					<li><a href="#"><span class="icon_vote"></span>投票</a></li>
+					<li><a href="#"><span class="icon_like"></span>喜欢</a></li>
+					<li><a href="#"><span class="icon_medal"></span>勋章</a></li>
+					<li><a href="#"><span class="icon_task"></span>任务</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<pw-drag id="sidebar_thread" />
+
+</div>
+<else />
+<div class="main_sidebar">
+<div class="box_wrap sidebar_login">
+
+ <dd class="operate"><button type="button" id="J_sidebar_login" class="btn btn_big btn_submit" onclick="location.href='__APP__/Login/index'">登录</button><a class="btn btn_big btn_error" href="__APP__/Register/index" rel="nofollow" onclick="location.href='__APP__/Register/index'">立即注册</a></dd>
+	</div>
+
+<div class="linkforum">
+<!--advertisement id='Site.Sider.User' sys='1'/-->
+
+				<div class="box_wrap" aria-label="版块列表" role="tablist">
+			<h2 class="box_title J_sidebar_box_toggle">版块列表</h2>
+			<div class="forum_menu">
+				<dl class=" current">
+					<dt class="J_sidebar_forum_toggle"><a href="#">phpwind 官方动态</a></dt>
+					<dd role="tabpanel">
+						<p><a class="" href="#">phpwind 黑板报</a></p>
+						<p><a class="" href="#">phpwind官方推荐</a></p>
+						<p><a class="" href="#">入门指南</a></p>
+					</dd>
+				</dl>
+				<dl class="">
+					<dt class="J_sidebar_forum_toggle"><a href="#">phpwind 移动版</a></dt>
+					<dd role="tabpanel">
+						<p><a class="" href="#">创业交流</a></p>
+						<p><a class="" href="#">程序发布</a></p>
+						<p><a class="" href="#">安装使用</a></p>
+					</dd>
+				</dl>
+				<dl class="">
+					<dt class="J_sidebar_forum_toggle"><a href="#">phpwind先进版9.x</a></dt>
+					<dd role="tabpanel">
+					<p><a class="" href="#">程序发布</a></p>
+					<p><a class="" href="#">安装使用</a></p>
+					<p><a class="" href="#">模板/插件</a></p>
+				</dd>
+				</dl>
+				<dl class="">
+					<dt class="J_sidebar_forum_toggle"><a href="#">phpwind稳定版8.x</a></dt>
+					<dd role="tabpanel">
+					<p><a class="" href="#">程序发布</a></p>
+					<p><a class="" href="#">安装使用</a></p>
+					<p><a class="" href="#">模板/插件</a></p>
+				</dd>
+				</dl>
+				<dl class="">
+					<dt class="J_sidebar_forum_toggle"><a href="#">phpwind  站长区</a></dt>
+					<dd role="tabpanel">
+					<p><a class="" href="#">站长交流</a></p>
+					<p><a class="" href="#">发展建议</a></p>
+					<p><a class="" href="#">SEO与优化</a></p>
+				</dd>
+				</dl>
+				<dl class="">
+					<dt class="J_sidebar_forum_toggle"><a href="#">phpwind  站务区</a></dt>
+					<dd role="tabpanel">
+					<p><a class="" href="#">站务处理</a></p>
+					<p><a class="" href="#">管理团队</a></p>
+					<p><a class="" href="#">保留区</a></p>
+				</dd>
+				</dl>
+			</div>
+		</div>
+<div class="box_wrap">
+	<h2 class="box_title">热门话题</h2>
+	<div class="tags_hot">
+	<ul class="cc">
+				<li><a href="#" class="title">插件</a></li>
+				<li><a href="#" class="title">风格</a></li>
+				<li><a href="#" class="title">模板</a></li>
+				<li><a href="#" class="title">链接</a></li>
+				<li><a href="#" class="title">地方门户</a></li>
+				<li><a href="#" class="title">扣扣小子</a></li>
+				<li><a href="#" class="title">pw模板</a></li>
+				<li><a href="#" class="title">地方门户模板</a></li>
+				<li><a href="#" class="title">田东网咯</a></li>
+				<li><a href="#" class="title">玩兔社区</a></li>
+			</ul>
+	</div>
+</div>
+ 
+
+</div>
+
+
+
+<!--design role="segment" id="linkdemo"/-->
+
+</div>
+</if>
+<script>
+	function keyDown(){
+		var uid = $("#J_punch_mine").prev().val();
+
+		//alert(uid);
+	 	$.ajax({
+			"url":"__APP__/Public/checkUserinfo",
+			"type":"post",
+			"data":{'uid':uid},
+			"dataType":'json',
+			"async":false,
+			"success":function(data){
+				if(data == 1){
+					$("#J_punch_mine").html("已经打卡");
+					$('#J_credittxt_pop').css('display','block');
+					setTimeout(function(){
+						$("#J_credittxt_pop").fadeOut(1000);
+					},3000);
+					setTimeout(function(){
+						window.location.reload();
+					},4000);
+				}
+			}
+		});		
+	}
+</script>

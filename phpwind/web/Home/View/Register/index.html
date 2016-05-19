@@ -1,0 +1,372 @@
+<extend name="Public/layout" />
+<block name="imcss">
+<link rel="stylesheet" href="__PUBLIC__/home/css/core_11.css" />
+<link rel="stylesheet" href="__PUBLIC__/home/css/style_11.css" />
+<link rel="stylesheet" href="__PUBLIC__/home/css/widthauto_11.css" />
+<script src="__PUBLIC__/home/js/wind.js"></script>
+<script src="__PUBLIC__/js/jquery.js"></script>
+<link href="__PUBLIC__/home/css/register_8.css" rel="stylesheet" />
+</block>
+
+
+</head>
+<body>
+<div class="wrap">
+<header class="header_wrap">
+<div class="head">
+	<div id="J_header" class="cc header">
+		<div class="logo">
+			<a href="{:U('Home/Index/index')}">
+								<!--后台logo上传-->
+				<img src="__PUBLIC__/home/picture/4439b6b579ac496.png" alt="phpwind 官方论坛">
+			</a>
+		</div>
+		<nav class="nav_wrap">
+			<div class="nav">
+				<ul>
+					<li class="current"><a href="{:U('Home/Index/index')}">首页</a></li>
+					<li class=""><a href="http://www.phpwind.net/index.php?m=bbs">新帖</a></li>
+					<li class=""><a href="http://phpwind.com/product.html" target="_blank">下载</a></li>
+					<li class=""><a href="http://market.aliyun.com/products/?tag=phpwind" target="_blank" style="font-weight:bold;">插件与模板</a></li>
+					<li class=""><a href="http://market.aliyun.com/products/55586021/cmjz000388.html" target="_blank" style="font-weight:bold;">0元商业授权</a></li>
+					<li class=""><a href="http://www.phpwind.com/setup.html" target="_blank">一键部署</a></li>
+				</ul>
+			</div>
+		</nav>
+		<div class="header_login">
+	<a rel="nofollow" href="{:U('Home/Login/index')}" class="mr15">登录</a><a rel="nofollow" href="{:U('Home/Register/index')}">注册</a>
+</div>
+	<div class="header_search" role="search">
+		<form action="http://www.phpwind.net/index.php?m=search&c=s" method="post">
+			<button  class="search-btn"type="submit" aria-label="搜索">搜索</button>
+			<input class="search-txt" type="text" id="s" aria-label="搜索关键词" accesskey="s" placeholder="搜索其实很简单" x-webkit-speech speech name="keyword"/>
+			<input type="hidden" name="csrf_token" value="5763281ca170bf65"/>
+		</form>
+	</div>
+	<a class="header_login_btn search-magnify"  href="#"><span class="header_search_btn">搜索</span></a>
+<script src="__PUBLIC__/home/js/jquery.js"></script>
+<script>
+    
+	/*搜索框的变化*/
+    $(function(){
+
+			$(".search-magnify").click(function(event) {
+
+				$(this).hide(); 
+				$(".search-txt").focus(); 
+				$(".header_search").animate({width: "240px"},200, function() { 
+            
+				});
+
+				return false;
+			});
+
+			$('body').click(function(event){
+				var e = event || window.event;
+                if ( !$(e.target).is('.header_search,.search-txt,.search-btn') ) {
+                
+                $(".header_search").animate({width: 0},100, function() {  
+				
+                });
+
+                $(".search-magnify").show();
+              }
+        });
+
+    })
+
+
+</script>
+	</div>
+</div>
+</header>
+<div class="tac"></div>
+<block name="main-content">
+	<div class="main_wrap">
+		<div class="box_wrap register cc">
+			<h2 class="reg_head">欢迎注册成为phpwind论坛 　 会员</h2>
+			<div class="reg_cont_wrap">	
+				<div class="reg_cont">
+						<!-- form表单 -->
+					<form action="{:U('Home/Register/insert')}" method="post" name="reg" >
+					<div class="reg_form">
+						<dl class="cc">
+							<dt><label for="login_username">用户名：</label></dt>
+							<dd><input id="username" name="username" type="text" class="input length_4" /></dd>
+							<dd id="loginuser" role="tooltip" aria-hidden="true" class="dd_r"></dd>
+						</dl>
+						<dl class="cc">
+							<dt><label for="login_password">密码：</label></dt>
+							<dd><input id="password" name="pwd" type="password" class="input length_4" /></dd>
+							<dd id="loginpwd" role="tooltip" aria-hidden="true" class="dd_r"></dd>
+						</dl>
+						<div id="J_login_qa" style="display:none;"></div>
+						<dl class="cc">
+							<dt><label for="login_password">确认密码：</label></dt>
+							<dd><input id="repassword" name="repwd" type="password" class="input length_4" /></dd>
+							<dd id="loginrepwd" role="tooltip" aria-hidden="true" class="dd_r"></dd>
+						</dl>
+						<div id="J_login_qa" style="display:none;"></div>
+						<dl class="cc">
+							<dt><label for="login_password">电子邮箱：</label></dt>
+							<dd><input id="email" name="email" type="text" class="input length_4" /></dd>
+							<dd id="loginemail" role="tooltip" aria-hidden="true" class="dd_r"></dd>
+						</dl>
+						<div id="J_login_qa" style="display:none;"></div>
+						<dl class="cc dl_cd">
+							<dt><label for="J_login_code">验证码：</label></dt>
+							<dd>
+								<input data-id="code" id="code" name="user_code" type="text" class="input length_4 mb5">
+								<dd id="logincode" role="tooltip" aria-hidden="true" class="dd_r"></dd>
+							</dd>
+							<div style="margin-left:125px;margin-top:40px;">
+							<img width="240" height="60" id="recode" src="__CONTROLLER__/code" onclick="this.src='__URL__/code?'+Math.random()" /><br/>
+							<a role="button" href="#" id="J_verify_update_a">点击图片换一个</a>
+							</div>
+						</dl>
+						<dl class="cc">
+							<dt>　</dt>
+							<dd style="color:red;">{$errorinfo}</dd>
+						</dl>
+						<dl class="cc">
+							<dt>&nbsp;</dt>
+							<dd><button class="btn btn_big btn_submit mr20" type="submit">同意右侧协议并注册</button>
+							</dd>
+						</dl>
+					</div>
+					</form>
+					
+				</div>
+			</div>
+			<div class="reg_side">
+				<div class="reg_side_cont">
+					<p class="mb10">已有帐号？</p>
+					<p class="mb20"><a rel="nofollow" href="{:U('Home/Login/index')}" class="btn btn_big">立即登录</a></p>
+				</div>
+			</div>
+		</div>
+	</div>
+<!--.main-wrap,#main End-->
+</block>
+<block name="imjs">
+<script>
+	
+	var password = document.getElementById("password");
+	var email = document.getElementById("email");
+	var isUser = false;
+	var isPwd = false;
+	var isrePwd = false;
+	var isEmail = false;
+	var isCode = false;
+	
+	$("form[name='reg']").submit(function(){
+		checkuser();
+		checkpwd();
+		checkrepwd();
+		checkemail();
+		checkcode();
+		if(isUser && isPwd && isrePwd && isEmail && isCode){
+			return true;
+		}else{
+			return false;
+		}
+	});
+	
+	$("#username").focus(function(){
+		$('#loginuser').css('color','#ccc');
+		$('#loginuser').html("请输入5-12用户名！");
+		$(this).parent().parent().addClass('current');
+	});
+	
+	$("#username").blur(function(){
+		$('#username').parent().parent().removeClass('current');
+		checkuser();
+	});
+	
+	function checkuser(){
+		if($('#username').val().length == 0){
+			var info = "用户名不能为空！";
+			var color = "red";
+			$('#loginuser').html('<span class="tips_icon_error"><span>' + info);
+			isUser = false;
+			return isUser;
+		}
+		/*$.ajax({
+			url:"__CONTROLLER__/checkedUser",
+			type:"POST",
+			data:"username=".$("#username").val(),
+			success:function(data){
+				if(data == 1){
+					var info = "用户名不存在！";
+					var color = "red";
+					$('#loginuser').html('<span class="tips_icon_error"><span>' + info);
+					return false;
+				}else{
+					$('#username').parent().parent().removeClass('current');
+					$('#loginuser').html('<span class="tips_icon_success"><span>');
+					return true;
+				}
+			},
+			dataType:'josn'
+		});*/
+		$.post('__CONTROLLER__/checkedUser',{'username':$("#username").val()},function(data){
+			if(data == 1){
+					var info = "用户名已存在！";
+					var color = "red";
+					$('#loginuser').html('<span class="tips_icon_error"><span>' + info);
+					isUser = false;
+				}else{
+					$('#loginuser').html('<span class="tips_icon_success"><span>');
+					isUser = true;
+				}
+		},'json');
+
+	}
+	
+	$("#password").focus(function(){
+		$("#loginpwd").css('color','#ccc');
+		$("#loginpwd").html('请输入密码！');
+		$(this).parent().parent().addClass('current');
+	});
+	
+	$("#password").blur(function(){
+		$('#password').parent().parent().removeClass('current');
+		checkpwd();
+		
+	});
+	
+	function checkpwd(){
+		//密码不能为空
+		if($('#password').val().length == 0){
+			var info = "密码不能为空";
+			var color = "red";
+			$('#loginpwd').html('<span class="tips_icon_error"><span>' + info);
+			isPwd = false;
+		}else if(password.value.match(/^\d{3,}$/)){
+			var info = "密码等级强度低";
+			var color = "red";
+			$('#loginpwd').html('<span class="tips_icon_error"><span>' + info);
+			isPwd = false;
+		}else{
+			$('#loginpwd').html('<span class="tips_icon_success"><span>');
+			isPwd = true;
+		}
+	}
+	
+	$("#repassword").focus(function(){
+		$("#loginrepwd").css('color','#ccc');
+		$("#loginrepwd").html('请确认密码！');
+		$(this).parent().parent().addClass('current');
+	});
+	
+	$("#repassword").blur(function(){
+		$('#repassword').parent().parent().removeClass('current');
+		checkrepwd();
+		
+	});
+	
+	function checkrepwd(){
+		//确认密码
+		if($('#repassword').val().length == 0){
+			var info = "确认密码不能为空！";
+			var color = "red";
+			$('#loginrepwd').html('<span class="tips_icon_error"><span>' + info);
+			isrePwd = false;
+		}else if($('#repassword').val() != $('#password').val()){
+			var info = "两次密码不一致！";
+			var color = "red";
+			$('#loginrepwd').html('<span class="tips_icon_error"><span>' + info);
+			isrePwd = false;
+		}else{
+			$('#loginrepwd').html('<span class="tips_icon_success"><span>');
+			isrePwd = true;
+		}
+	}
+	
+	$("#email").focus(function(){
+		$("#loginemail").css('color','#ccc');
+		$("#loginemail").html('请输入电子邮箱！');
+		$(this).parent().parent().addClass('current');
+	});
+	
+	$("#email").blur(function(){
+		$('#email').parent().parent().removeClass('current');
+		checkemail();
+	});
+	
+	function checkemail(){
+		//确认电子邮箱
+		if($("#email").val().length == 0){
+			var info = "电子邮箱不能为空！";
+			var color = "red";
+			$('#loginemail').html('<span class="tips_icon_error"><span>' + info);
+			isEmail = false;
+		}else if(!email.value.match(/^\w+@\w+(\.\w+){1,3}$/)){
+			var info = "电子邮箱的格式不正确！";
+			var color = "red";
+			$('#loginemail').html('<span class="tips_icon_error"><span>' + info);
+			isEmail = false;
+		}else{
+			$('#loginemail').html('<span class="tips_icon_success"><span>');
+			isEmail = true;
+		}
+	}
+	
+	$('#code').focus(function(){
+		$("#logincode").css('color','#ccc');
+		$("#logincode").html('请输入验证码！');
+		$(this).parent().parent().addClass('current');
+	});
+	
+	$('#code').blur(function(){
+		$('#code').parent().parent().removeClass('current');
+		checkcode();
+	});
+	
+	// function checkcode(){
+	// 	//验证码不能为空
+		
+	// 	if($('#code').val().length == 0){
+	// 		var info = "验证码不能为空";
+	// 		var color = "red";
+			
+	// 		$('#logincode').html('<span class="tips_icon_error"><span>' + info);
+	// 		isCode = false;
+	// 	}
+			
+	// 		$.ajax({
+	// 			url:"__CONTROLLER__/checkedCode",
+	// 			type:"POST",
+	// 			data:$('#code').val(),
+	// 			success:function(data){
+	// 				if(data == 1){
+	// 					var info = "验证码错误！";
+	// 					var color = "red";
+	// 					$('#code').parent().parent().removeClass('current');
+	// 					$('#logincode').html('<span class="tips_icon_error"><span>' + info);
+	// 					return false;
+	// 				}else{
+	// 					$('#code').parent().parent().removeClass('current');
+	// 					$('#logincode').html('<span class="tips_icon_success"><span>');
+	// 					return true;
+	// 				}
+	// 			}
+	// 		});
+		
+	// 	$.post('__CONTROLLER__/checkedCode',{'user_code':$("#code").val()},function(data){
+	// 			if(data == 1){
+	// 					var info = "验证码错误！";
+	// 					var color = "red";
+	// 					$('#logincode').html('<span class="tips_icon_error"><span>' + info);
+	// 					isCode = false;
+	// 				}else{
+	// 					$('#logincode').html('<span class="tips_icon_success"><span>');
+	// 					isCode = true;
+	// 				}
+	// 	},'json');
+		
+		
+	// }
+	
+</script>
+</block>
